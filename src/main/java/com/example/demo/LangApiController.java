@@ -23,6 +23,12 @@ public class LangApiController {
 	public String helloWorld() {
 		return "Hello World";
 	}
+	
+	@GetMapping(path = "/translate")
+	public String Translator(String word, 
+			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
+		return messageSource.getMessage(word+".message", null, locale);
+	}
 
 
 //passing a path variable 
@@ -38,4 +44,5 @@ public class LangApiController {
 			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
 		return messageSource.getMessage("hello.world.message", null, locale);
 	}
+	
 }
