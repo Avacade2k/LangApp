@@ -17,32 +17,21 @@ import org.springframework.context.annotation.Configuration;
 public class LangApiController {
 	@Autowired
 	private MessageSource messageSource;
-
-
-	@GetMapping(path = "/hello-world")
-	public String helloWorld() {
-		return "Hello World";
-	}
 	
 	@GetMapping(path = "/translate")
 	public String Translator(String word, 
 			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
-		return messageSource.getMessage(word+".message", null, locale);
+		try {
+			return messageSource.getMessage(word+".message", null, locale);
+			}
+		catch(Exception e) {
+			return "Can not be found";
+			}
 	}
-
-
-//passing a path variable 
-//hello-world/path/ASTRING
-	@GetMapping(path = "/hello-world/path/{name}")
-	public String helloWorldPathVariable(@PathVariable String name) {
-		return ("Hello World"+ name); 
-	}
-
-//I18N 
-	@GetMapping(path = "/hello-world-I18N")
-	public String helloWorldInternationalized(
-			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
-		return messageSource.getMessage("hello.world.message", null, locale);
+	
+	@GetMapping(path = "/translate/add/{name}&{translate}")
+	public String expandApi(@PathVariable String name, String translate) {
+		return ("Expanding API with: "+ name);
 	}
 	
 }
