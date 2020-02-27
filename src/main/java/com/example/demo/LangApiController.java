@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,20 +18,24 @@ public class LangApiController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@GetMapping(path = "/translate")
+	//Translating the searched word
+	@GetMapping(path = "/translate", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String Translator(String word, 
 			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
 		try {
-			return messageSource.getMessage(word+".message", null, locale);
+			return messageSource.getMessage(word+".message", null, "Word can not be found", locale);
 			}
 		catch(Exception e) {
-			return "Can not be found";
+			return "Something went wrong";
 			}
 	}
 	
-	@GetMapping(path = "/translate/add/{name}&{translate}")
-	public String expandApi(@PathVariable String name, String translate) {
+	//Adding new words to properties
+	@GetMapping(path = "/translate/add", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String expandApi(String name, String translate) {
+		LangApiMain.appendPropertiesEng(name, name);
+		LangApiMain.appendPropertiesSwe(name, translate);
 		return ("Expanding API with: "+ name);
 	}
-	
+		
 }
