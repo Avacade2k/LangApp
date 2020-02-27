@@ -23,7 +23,7 @@ public class LangApiController {
 	public String Translator(String word, 
 			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
 		try {
-			return messageSource.getMessage(word+".message", null, "Word can not be found", locale);
+			return messageSource.getMessage(word+".message", null, "Word can not be found", locale); //returns translation
 			}
 		catch(Exception e) {
 			return "Something went wrong";
@@ -33,8 +33,8 @@ public class LangApiController {
 	//Adding new words to properties
 	@GetMapping(path = "/translate/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String expandApi(String name, String translate) {
-		LangApiMain.appendPropertiesEng(name, name);
-		LangApiMain.appendPropertiesSwe(name, translate);
+		LangApiMain.appendPropertiesEng(name, name); //updating properties
+		LangApiMain.appendPropertiesSwe(name, translate); //updating properties_se
 		return ("Expanding API with: "+ name);
 	}
 		

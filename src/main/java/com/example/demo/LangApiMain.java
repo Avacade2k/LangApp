@@ -17,21 +17,21 @@ public class LangApiMain {
             Properties configProperty = new Properties();
             //Properties pathing
             File file = new File("C:\\Users\\Avaca\\OneDrive\\Documents\\LangApp\\src\\main\\resources\\messages.properties");
-            fileIn = new FileInputStream(file);
+            fileIn = new FileInputStream(file); //opens input stream
             configProperty.load(fileIn);
             //Adding properties
             configProperty.setProperty(key+".message", data);
-            fileOut = new FileOutputStream(file);
+            fileOut = new FileOutputStream(file); //opens output stream
             configProperty.store(fileOut, "sample properties");
 
         } catch (Exception ex) {
-            Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex); //logs error
         } finally {
 
             try {
-                fileOut.close();
+                fileOut.close(); //closes output stream
             } catch (IOException ex) {
-                Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex); //logs error
             }
         }
 	}
@@ -41,22 +41,23 @@ public class LangApiMain {
         FileInputStream fileIn = null;
         try {
             Properties configProperty = new Properties();
-
+            //Properties pathing
             File file = new File("C:\\Users\\Avaca\\OneDrive\\Documents\\LangApp\\src\\main\\resources\\messages_se.properties");
-            fileIn = new FileInputStream(file);
+            fileIn = new FileInputStream(file); //opens input stream
             configProperty.load(fileIn);
+            //Adding properties
             configProperty.setProperty(key+".message", data);
-            fileOut = new FileOutputStream(file);
+            fileOut = new FileOutputStream(file); //opens output stream
             configProperty.store(fileOut, "sample properties");
 
         } catch (Exception ex) {
-            Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex); //logs error
         } finally {
 
             try {
-                fileOut.close();
+                fileOut.close(); //closes output stream
             } catch (IOException ex) {
-                Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LangApiMain.class.getName()).log(Level.SEVERE, null, ex); //logs error
             }
         }
 	}
